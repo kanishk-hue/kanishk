@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitBulls — Build Strength Without Limits</title>
+<meta name="description" content="Premium gym equipment for athletes who demand performance without compromise.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#ff3b30;--red-dark:#cc2820;--red-glow:rgba(255,59,48,.22);
+  --dark:#050505;--dark2:#0a0a0f;--steel:#0f172a;--steel2:#1e293b;
+  --card:rgba(255,255,255,.04);--card-b:rgba(255,255,255,.08);
+  --glass:rgba(10,10,20,.75);--glass-b:rgba(255,255,255,.1);
+  --white:#fff;--muted:rgba(255,255,255,.55);--muted2:rgba(255,255,255,.22);
+  --gold:#f59e0b;--green:#4ade80;
+  --fh:'Poppins',sans-serif;--fs:'Montserrat',sans-serif;--fb:'Inter',sans-serif;
+  --r:16px;--rsm:10px;--rlg:24px;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--white);font-family:var(--fb);overflow-x:hidden;line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{font-family:var(--fb);cursor:pointer}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+
+/* PROGRESS */
+#sp{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--red),var(--gold));z-index:9999;width:0;transition:width .1s linear;pointer-events:none}
+
+/* NAVBAR */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:74px;background:transparent;border-bottom:1px solid transparent;transition:all .4s var(--ease)}
+#nav.on{background:rgba(5,5,5,.92);backdrop-filter:blur(20px);height:62px;border-bottom-color:var(--glass-b)}
+.logo{font-family:var(--fh);font-size:1.7rem;font-weight:900;letter-spacing:1px}
+.logo span{color:var(--red)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:var(--fs);font-size:.82rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);position:relative;padding-bottom:3px;transition:color .3s}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--red);transition:width .3s var(--ease);border-radius:1px}
+.nav-links a:hover,.nav-links a.act{color:var(--white)}
+.nav-links a:hover::after,.nav-links a.act::after{width:100%}
+.nav-acts{display:flex;align-items:center;gap:1rem}
+.nib{background:none;border:none;color:var(--muted);padding:8px;border-radius:8px;font-size:1.1rem;display:flex;align-items:center;transition:all .25s;position:relative}
+.nib:hover{color:var(--white);background:rgba(255,255,255,.07)}
+.cdot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--red);border-radius:50%;border:2px solid var(--dark)}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:7px}
+.hbg span{display:block;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
+.hbg span:nth-child(1){width:22px}
+.hbg span:nth-child(2){width:15px}
+.hbg span:nth-child(3){width:19px}
+.hbg.open span:nth-child(1){width:22px;transform:translateY(7px) rotate(45deg)}
+.hbg.open span:nth-child(2){opacity:0}
+.hbg.open span:nth-child(3){width:22px;transform:translateY(-7px) rotate(-45deg)}
+.mob-menu{display:none;position:fixed;top:62px;left:0;right:0;z-index:998;background:rgba(5,5,5,.97);backdrop-filter:blur(20px);padding:1.5rem 5%;border-bottom:1px solid var(--glass-b);flex-direction:column;gap:.25rem}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:var(--fs);font-size:1.1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.05);transition:color .25s;display:flex;align-items:center;gap:.6rem}
+.mob-menu a::before{content:'›';color:var(--red);font-size:1.2rem}
+.mob-menu a:hover{color:var(--red)}
+
+/* PAGES */
+.pg{display:none}.pg.act{display:block}
+
+/* BUTTONS */
+.btn-r{display:inline-flex;align-items:center;gap:.55rem;background:linear-gradient(135deg,var(--red),#ff6535);color:var(--white);font-family:var(--fs);font-size:.85rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:.95rem 2rem;border-radius:var(--rsm);border:none;box-shadow:0 8px 28px var(--red-glow);transition:all .3s var(--ease);position:relative;overflow:hidden}
+.btn-r::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.12);opacity:0;transition:opacity .3s}
+.btn-r:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(255,59,48,.42)}
+.btn-r:hover::after{opacity:1}
+.btn-g{display:inline-flex;align-items:center;gap:.55rem;background:rgba(255,255,255,.07);color:var(--white);font-family:var(--fs);font-size:.85rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:.95rem 2rem;border-radius:var(--rsm);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px);transition:all .3s}
+.btn-g:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.3);transform:translateY(-3px)}
+
+/* SECTION HELPERS */
+.sec{padding:5.5rem 6%}
+.stag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fs);font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:.85rem}
+.stag::before{content:'';width:18px;height:2px;background:var(--red);border-radius:1px}
+.sh{font-family:var(--fh);font-size:clamp(2rem,4.2vw,3.8rem);font-weight:900;line-height:1.05;letter-spacing:-1px;margin-bottom:1.1rem}
+.sh .hl{background:linear-gradient(135deg,var(--red),#ff6535);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ssub{font-size:.975rem;color:var(--muted);max-width:500px;line-height:1.75}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.h-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30');background-size:cover;background-position:center;transform:scale(1.06);transition:transform 7s ease;filter:grayscale(100%) brightness(1.05) contrast(1.1)}
+.h-bg.rdy{transform:scale(1)}
+.h-ov1{position:absolute;inset:0;background:linear-gradient(120deg,rgba(5,5,5,.93) 0%,rgba(5,5,5,.65) 55%,rgba(5,5,5,.35) 100%)}
+.h-ov2{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,1) 0%,transparent 45%)}
+
+.h-accent{position:absolute;right:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,var(--red),transparent);opacity:.6}
+.h-content{position:relative;z-index:2;padding:0 6%;padding-top:90px;max-width:880px}
+.h-eye{display:inline-flex;align-items:center;gap:.65rem;background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.28);border-radius:40px;padding:5px 16px;font-family:var(--fs);font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:1.75rem;opacity:0;animation:su .6s .3s forwards}
+.h-ep{width:5px;height:5px;border-radius:50%;background:var(--red);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.h-title{font-family:var(--fh);font-size:clamp(3.2rem,9vw,9.5rem);font-weight:900;line-height:.88;letter-spacing:-3px;margin-bottom:1.4rem;opacity:0;animation:su .7s .5s forwards}
+.h-title .hl2{background:linear-gradient(135deg,var(--red),#ff6535);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.h-sub{font-size:clamp(.95rem,1.8vw,1.15rem);font-weight:300;color:rgba(255,255,255,.68);max-width:520px;line-height:1.78;margin-bottom:2.25rem;opacity:0;animation:su .7s .7s forwards}
+.h-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;opacity:0;animation:su .7s .9s forwards}
+.h-trust{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;opacity:0;animation:su .7s 1.1s forwards}
+.t-div{width:1px;height:30px;background:var(--muted2)}
+.t-num{font-family:var(--fh);font-size:1.45rem;font-weight:900;line-height:1}
+.t-lbl{font-size:.67rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.scroll-cue{position:absolute;bottom:2.25rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;animation:fadeIn .8s 1.8s forwards;z-index:2}
+.scroll-cue span{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.sw{width:22px;height:36px;border:1.5px solid var(--muted2);border-radius:11px;display:flex;justify-content:center;padding-top:6px}
+.sw::before{content:'';width:3px;height:6px;background:var(--red);border-radius:2px;animation:sd 1.8s infinite}
+@keyframes sd{0%{opacity:1;transform:translateY(0)}80%{opacity:0;transform:translateY(11px)}100%{opacity:0}}
+@keyframes su{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* CATEGORIES */
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem;margin-top:2.75rem}
+.cat-card{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;cursor:pointer;border:1px solid var(--card-b);transition:all .35s var(--ease)}
+.cat-card:hover{transform:translateY(-8px);box-shadow:0 22px 56px rgba(255,59,48,.22);border-color:rgba(255,59,48,.35)}
+.cat-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .55s ease}
+.cat-card:hover .cat-img{transform:scale(1.09)}
+.cat-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,.92) 0%,rgba(5,5,5,.15) 65%,transparent 100%);transition:all .35s}
+.cat-card:hover .cat-ov{background:linear-gradient(to top,rgba(5,5,5,.96) 0%,rgba(255,59,48,.1) 65%,transparent 100%)}
+.cat-body{position:absolute;bottom:0;left:0;right:0;padding:1.4rem}
+.cat-ico{width:42px;height:42px;background:rgba(255,59,48,.14);border:1px solid rgba(255,59,48,.3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:.6rem;transition:all .35s}
+.cat-card:hover .cat-ico{background:var(--red);border-color:var(--red)}
+.cat-name{font-family:var(--fh);font-size:1.05rem;font-weight:800}
+.cat-cnt{font-size:.72rem;color:var(--muted);margin-top:2px}
+.cat-arr{font-family:var(--fs);font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-top:.4rem;opacity:0;transform:translateX(-6px);transition:all .3s}
+.cat-card:hover .cat-arr{opacity:1;transform:none}
+
+/* WHY — fixed below in SECTION BACKGROUNDS block */
+#why-placeholder{display:none}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.75rem}
+.why-card{background:var(--card);border:1px solid var(--card-b);border-radius:var(--r);padding:1.85rem;transition:all .35s;position:relative;overflow:hidden}
+.why-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,59,48,.05),transparent);opacity:0;transition:opacity .35s}
+.why-card:hover{border-color:rgba(255,59,48,.3);transform:translateY(-6px);box-shadow:0 18px 44px rgba(255,59,48,.1)}
+.why-card:hover::before{opacity:1}
+.why-ico{width:52px;height:52px;background:linear-gradient(135deg,rgba(255,59,48,.18),rgba(255,59,48,.05));border:1px solid rgba(255,59,48,.22);border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.1rem}
+.why-t{font-family:var(--fh);font-size:1rem;font-weight:800;margin-bottom:.65rem;line-height:1.25}
+.why-d{font-size:.86rem;color:var(--muted);line-height:1.72}
+
+/* PRODUCTS GRID */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2.75rem}
+.pc{background:var(--card);border:1px solid var(--card-b);border-radius:var(--r);overflow:hidden;transition:all .35s;cursor:pointer}
+.pc:hover{transform:translateY(-8px);border-color:rgba(255,59,48,.22);box-shadow:0 22px 55px rgba(0,0,0,.5),0 0 0 1px rgba(255,59,48,.08)}
+.pi{position:relative;aspect-ratio:1;overflow:hidden;background:rgba(255,255,255,.02)}
+.pi img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease;display:block}
+.pc:hover .pi img{transform:scale(1.08)}
+.pa{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;background:rgba(5,5,5,.62);backdrop-filter:blur(4px);opacity:0;transition:opacity .3s}
+.pc:hover .pa{opacity:1}
+.pa-btn{display:inline-flex;align-items:center;gap:.45rem;background:linear-gradient(135deg,var(--red),#ff6535);color:var(--white);font-family:var(--fs);font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:.7rem 1.6rem;border-radius:8px;border:none;box-shadow:0 6px 20px var(--red-glow);transition:transform .25s}
+.pa-btn:hover{transform:scale(1.04)}
+.pa-w{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);color:var(--white);font-size:.8rem;padding:.55rem 1.2rem;border-radius:8px;backdrop-filter:blur(8px);transition:all .25s}
+.pa-w:hover{background:rgba(255,255,255,.2)}
+.pb{position:absolute;top:11px;left:11px;display:flex;gap:5px;flex-direction:column}
+.pbg{font-family:var(--fs);font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 9px;border-radius:6px;display:inline-block;width:fit-content}
+.pbg-h{background:var(--red);color:var(--white)}
+.pbg-n{background:var(--gold);color:#000}
+.pbg-s{background:rgba(255,255,255,.14);color:var(--white);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px)}
+.pinfo{padding:1.15rem 1.15rem 1.4rem}
+.pname{font-family:var(--fh);font-size:.975rem;font-weight:700;margin-bottom:.38rem;line-height:1.3}
+.pstars{display:flex;align-items:center;gap:.38rem;margin-bottom:.65rem}
+.st{color:var(--gold);font-size:.78rem;letter-spacing:1px}
+.sc{font-size:.72rem;color:var(--muted)}
+.ppr{display:flex;align-items:baseline;gap:.55rem}
+.pcur{font-family:var(--fh);font-size:1.25rem;font-weight:800}
+.pold{font-size:.88rem;color:var(--muted);text-decoration:line-through}
+.psave{font-size:.68rem;font-weight:700;color:var(--green);background:rgba(74,222,128,.1);padding:2px 7px;border-radius:4px}
+
+/* TESTIMONIALS — fixed below in SECTION BACKGROUNDS block */
+#test-placeholder{display:none}
+.t-track-w{
+  position:relative;
+  overflow:hidden;
+  margin-top:2.75rem;
+  border-radius:var(--r);
+}
+.t-track{
+  display:flex;
+  transition:transform .55s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+.tc{
+  min-width:100%;
+  width:100%;
+  flex-shrink:0;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r);
+  padding:2.5rem 3rem;
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:2rem;
+  align-items:center;
+  box-sizing:border-box;
+}
+@media(max-width:768px){.tc{padding:1.75rem;grid-template-columns:1fr;gap:1.25rem}}
+.tc::before{
+  content:'"';position:absolute;top:-20px;right:40px;
+  font-size:10rem;font-family:Georgia,serif;
+  color:rgba(255,59,48,.08);line-height:1;pointer-events:none;
+}
+.tc:hover{border-color:rgba(255,59,48,.22);box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.tc-left{}
+.tc-stars{color:var(--gold);font-size:.88rem;margin-bottom:1.25rem;letter-spacing:2px}
+.ver{display:inline-flex;align-items:center;gap:3px;font-size:.67rem;font-weight:600;color:var(--green);background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.18);padding:2px 8px;border-radius:20px;margin-left:.6rem}
+.tc-txt{font-size:1.05rem;color:rgba(255,255,255,.82);line-height:1.85;margin-bottom:1.75rem;font-style:italic}
+.tc-auth{display:flex;align-items:center;gap:1rem}
+.av{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--red),#ff6535);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:.95rem;font-weight:800;border:2px solid rgba(255,59,48,.35);flex-shrink:0;box-shadow:0 4px 16px rgba(255,59,48,.3)}
+.an{font-family:var(--fs);font-size:.9rem;font-weight:700}
+.ar{font-size:.75rem;color:var(--muted);margin-top:2px}
+.tc-right{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;min-width:100px}
+.tc-rating-big{font-family:var(--fh);font-size:3.5rem;font-weight:900;color:var(--white);line-height:1}
+.tc-rating-stars{color:var(--gold);font-size:.9rem;letter-spacing:3px}
+.tc-rating-label{font-size:.68rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;text-align:center}
+@media(max-width:768px){.tc-right{display:none}}
+.c-ctrl{display:flex;align-items:center;gap:1rem;margin-top:1.75rem}
+.cb{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--white);font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .3s;cursor:pointer}
+.cb:hover{background:var(--red);border-color:var(--red);box-shadow:0 4px 20px var(--red-glow)}
+.cdots{display:flex;gap:6px;align-items:center}
+.cdot2{width:7px;height:7px;border-radius:50%;background:var(--muted2);transition:all .35s;cursor:pointer}
+.cdot2.act{width:24px;border-radius:4px;background:var(--red)}
+
+/* BUNDLE — fixed below in SECTION BACKGROUNDS block */
+#bundle-placeholder{display:none}
+.b-lay{display:grid;grid-template-columns:1fr 400px;gap:2.75rem;margin-top:2.75rem;align-items:start}
+.b-items{display:flex;flex-direction:column;gap:.85rem}
+.b-item{background:rgba(255,255,255,.03);border:1px solid var(--card-b);border-radius:var(--r);padding:1.15rem 1.4rem;display:flex;align-items:center;gap:1.1rem;cursor:pointer;transition:all .3s}
+.b-item:hover{border-color:rgba(255,59,48,.2)}
+.b-item.sel{border-color:rgba(255,59,48,.48);background:rgba(255,59,48,.06);box-shadow:0 0 0 1px rgba(255,59,48,.14)}
+.b-chk{width:21px;height:21px;border-radius:6px;flex-shrink:0;border:1.5px solid var(--muted2);display:flex;align-items:center;justify-content:center;transition:all .3s}
+.b-item.sel .b-chk{background:var(--red);border-color:var(--red)}
+.b-chk::after{content:'✓';color:#fff;font-size:.72rem;font-weight:700;opacity:0;transition:opacity .3s}
+.b-item.sel .b-chk::after{opacity:1}
+.b-em{font-size:1.4rem;flex-shrink:0}
+.b-inf{flex:1}
+.b-nm{font-family:var(--fs);font-size:.875rem;font-weight:700;margin-bottom:1px}
+.b-ds{font-size:.73rem;color:var(--muted)}
+.b-pr{font-family:var(--fh);font-size:1.05rem;font-weight:800;flex-shrink:0}
+.b-sum{background:rgba(255,255,255,.03);border:1px solid var(--card-b);border-radius:var(--rlg);padding:1.85rem;position:sticky;top:80px}
+.b-sum-t{font-family:var(--fh);font-size:1.05rem;font-weight:800;margin-bottom:1.4rem}
+.b-line{display:flex;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.862rem}
+.b-line:last-of-type{border-bottom:none}
+.bl-n{color:var(--muted)}
+.bl-v{font-weight:600}
+.b-disc{display:flex;justify-content:space-between;padding:.7rem .9rem;margin:1rem 0;background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.14);border-radius:var(--rsm);font-size:.82rem}
+.b-tot{display:flex;justify-content:space-between;align-items:baseline;padding-top:1.15rem;border-top:2px solid rgba(255,59,48,.28);margin-top:.35rem}
+.b-tot-l{font-family:var(--fs);font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted)}
+.b-tot-v{font-family:var(--fh);font-size:2.1rem;font-weight:900;background:linear-gradient(135deg,var(--red),#ff6535);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* LOYALTY — fixed below in SECTION BACKGROUNDS block */
+#loyalty-placeholder{display:none}
+.loy-badge{width:96px;height:96px;margin:0 auto 1.75rem;background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(245,158,11,.05));border:1.5px solid rgba(245,158,11,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.6rem;box-shadow:0 0 44px rgba(245,158,11,.14)}
+.loy-title{font-family:var(--fh);font-size:clamp(2.4rem,5vw,5rem);font-weight:900;line-height:1;margin-bottom:.9rem}
+.loy-gld{background:linear-gradient(135deg,var(--gold),#fbbf24,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.loy-sub{font-size:.975rem;color:var(--muted);max-width:500px;margin:0 auto 2.75rem;line-height:1.75}
+.loy-tiers{display:flex;justify-content:center;gap:1.1rem;flex-wrap:wrap;margin-bottom:2.75rem}
+.loy-tc{background:var(--card);border:1px solid var(--card-b);border-radius:var(--r);padding:1.6rem 1.4rem;min-width:145px;text-align:center;transition:all .35s}
+.loy-tc:hover{transform:translateY(-6px);border-color:rgba(245,158,11,.32);box-shadow:0 18px 44px rgba(245,158,11,.09)}
+.lt-em{font-size:1.85rem;margin-bottom:.65rem}
+.lt-nm{font-family:var(--fh);font-size:.88rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.2rem}
+.lt-sp{font-size:.72rem;color:var(--muted)}
+.lt-pk{font-size:.67rem;color:rgba(245,158,11,.65);margin-top:.4rem}
+
+/* NEWSLETTER */
+#nl{position:relative;overflow:hidden;background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1800&q=80&fit=crop&sat=-100&con=30');background-size:cover;background-position:center;padding:6.5rem 6%}
+#nl::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(5,5,5,.95) 0%,rgba(255,59,48,.14) 50%,rgba(5,5,5,.88) 100%)}
+.nl-in{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:3rem;flex-wrap:wrap}
+.nl-form{display:flex;flex-direction:column;gap:.7rem;flex:1;min-width:280px;max-width:440px}
+.nl-inp{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--rsm);color:var(--white);padding:.95rem 1.15rem;font-size:.92rem;font-family:var(--fb);transition:border-color .3s;backdrop-filter:blur(10px)}
+.nl-inp::placeholder{color:var(--muted2)}
+.nl-inp:focus{outline:none;border-color:rgba(255,59,48,.48)}
+.nl-disc{font-size:.7rem;color:var(--muted2)}
+
+/* INSTAGRAM — fixed below in SECTION BACKGROUNDS block */
+#ig-placeholder{display:none}
+.ig-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-top:1.85rem;border-radius:var(--r);overflow:hidden}
+.ig-c{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer}
+.ig-c img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block}
+.ig-c:hover img{transform:scale(1.1)}
+.ig-ov{position:absolute;inset:0;background:rgba(255,59,48,.75);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;backdrop-filter:blur(2px)}
+.ig-c:hover .ig-ov{opacity:1}
+.ig-hnd{text-align:center;margin-top:1.5rem;font-family:var(--fs);font-size:.82rem;font-weight:600;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.ig-hnd a{color:var(--red)}
+
+/* PRODUCTS PAGE */
+.pph{padding-top:74px;background-image:url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1600&q=80&fit=crop&sat=-100&con=30');background-size:cover;background-position:center;position:relative}
+.pph::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(5,5,5,.95),rgba(5,5,5,.55))}
+.pph-in{position:relative;z-index:1;padding:3.75rem 6%}
+.p-lay{display:flex;gap:2.25rem;padding:3.25rem 6%}
+.fsb{width:250px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start}
+.fs-sec{margin-bottom:1.85rem;padding-bottom:1.85rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.fs-sec:last-child{border-bottom:none}
+.fs-h{font-family:var(--fs);font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem;display:flex;align-items:center;gap:.45rem}
+.fs-h::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+.fck{display:flex;align-items:center;gap:.7rem;padding:.4rem 0;cursor:pointer}
+.fck input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:pointer}
+.fck span{font-size:.85rem;color:rgba(255,255,255,.72);transition:color .25s}
+.fck:hover span{color:var(--white)}
+.f-range{-webkit-appearance:none;width:100%;height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer}
+.f-range::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;background:var(--red);border-radius:50%;cursor:pointer;box-shadow:0 0 8px var(--red-glow)}
+.f-pdsp{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-top:.45rem}
+.pm{flex:1;min-width:0}
+.tb{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.85rem;padding-bottom:1.15rem;border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap;gap:.85rem}
+.tb-cnt{font-size:.86rem;color:var(--muted)}
+.tb-r{display:flex;gap:.65rem;align-items:center}
+.vb{width:34px;height:34px;border-radius:7px;background:var(--card);border:1px solid var(--card-b);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:all .25s}
+.vb.act,.vb:hover{background:var(--red);border-color:var(--red);color:var(--white)}
+.ss{background:var(--card);border:1px solid var(--card-b);color:var(--white);padding:.48rem .9rem;border-radius:7px;font-size:.82rem;cursor:pointer;font-family:var(--fb)}
+.pg3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+
+/* PRODUCT DETAIL */
+.pd-w{padding:5.75rem 6% 4rem}
+.back-b{display:inline-flex;align-items:center;gap:.45rem;color:var(--muted);font-size:.86rem;margin-bottom:2.25rem;transition:color .25s;background:none;border:none;font-family:var(--fb)}
+.back-b:hover{color:var(--red)}
+.pd-g{display:grid;grid-template-columns:1fr 1fr;gap:3.75rem;align-items:start}
+.pd-gal{position:sticky;top:80px}
+.pd-mi{border-radius:var(--r);overflow:hidden;aspect-ratio:1;background:var(--card);border:1px solid var(--card-b);cursor:zoom-in;margin-bottom:.85rem}
+.pd-mi img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block}
+.pd-mi:hover img{transform:scale(1.07)}
+.pd-ths{display:flex;gap:.65rem}
+.pd-th{flex:1;aspect-ratio:1;border-radius:9px;overflow:hidden;border:1.5px solid transparent;cursor:pointer;transition:all .3s;background:var(--card)}
+.pd-th.act,.pd-th:hover{border-color:var(--red)}
+.pd-th img{width:100%;height:100%;object-fit:cover;opacity:.68;transition:opacity .3s;display:block}
+.pd-th.act img,.pd-th:hover img{opacity:1}
+.pd-cat{font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:.65rem;font-family:var(--fs)}
+.pd-nm{font-family:var(--fh);font-size:clamp(1.85rem,3.2vw,2.85rem);font-weight:900;line-height:1.05;margin-bottom:.9rem}
+.pd-rat{display:flex;align-items:center;gap:.7rem;margin-bottom:1.35rem}
+.pd-sts{color:var(--gold);font-size:.88rem}
+.pd-rc{font-size:.82rem;color:var(--muted)}
+.pd-prc{font-family:var(--fh);font-size:2.35rem;font-weight:900;margin-bottom:.45rem}
+.pd-stk{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:600;color:var(--green);margin-bottom:1.6rem}
+.stk-p{width:7px;height:7px;border-radius:50%;background:var(--green);animation:stk 2s infinite}
+@keyframes stk{0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.4)}50%{box-shadow:0 0 0 5px rgba(74,222,128,0)}}
+.fsbar{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--rsm);padding:.9rem 1.15rem;margin-bottom:1.6rem}
+.fsbar-l{font-size:.8rem;color:rgba(255,255,255,.72);margin-bottom:.45rem}
+.fsbar-l strong{color:var(--white)}
+.fsbar-t{height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.fsbar-f{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:2px}
+.pd-wl{font-family:var(--fs);font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem}
+.pd-wo{display:flex;gap:.65rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.wb{padding:.55rem 1.15rem;border-radius:7px;font-family:var(--fs);font-size:.79rem;font-weight:700;border:1.5px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.58);cursor:pointer;transition:all .3s}
+.wb:hover{border-color:rgba(255,59,48,.48);color:var(--white);background:rgba(255,59,48,.07)}
+.wb.act{border-color:var(--red);color:var(--white);background:rgba(255,59,48,.1);box-shadow:0 0 14px rgba(255,59,48,.14)}
+.pd-ctas{display:flex;gap:.85rem;margin-bottom:1.6rem}
+.pd-ctas .btn-r{flex:1;justify-content:center;font-size:.82rem}
+.btn-b{flex:1;justify-content:center;display:inline-flex;align-items:center;background:rgba(255,255,255,.08);color:var(--white);font-family:var(--fs);font-size:.82rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:.95rem;border-radius:var(--rsm);border:1.5px solid rgba(255,255,255,.15);backdrop-filter:blur(10px);transition:all .3s;cursor:pointer}
+.btn-b:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28)}
+.pd-tabs-n{display:flex;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:1.4rem}
+.pt{font-family:var(--fs);font-size:.74rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:.7rem 1.15rem .7rem 0;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:all .3s}
+.pt.act{color:var(--white);border-bottom-color:var(--red)}
+.pt:hover{color:rgba(255,255,255,.8)}
+.ptc{display:none;font-size:.88rem;color:rgba(255,255,255,.72);line-height:1.85}
+.ptc.act{display:block}
+.spec-t{width:100%;border-collapse:collapse}
+.spec-t tr{border-bottom:1px solid rgba(255,255,255,.05)}
+.spec-t td{padding:.7rem 0;font-size:.86rem}
+.spec-t td:first-child{color:var(--muted);width:44%}
+
+/* ABOUT */
+.ab-hero{min-height:68vh;padding-top:74px;position:relative;display:flex;align-items:flex-end;background-image:url('https://images.unsplash.com/photo-1581009137042-c552e485697a?w=1800&q=80&fit=crop&sat=-100&con=30');background-size:cover;background-position:center}
+.ab-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(5,5,5,.94) 0%,rgba(5,5,5,.5) 60%,rgba(5,5,5,.28) 100%)}
+.ab-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,1) 0%,transparent 55%)}
+.ab-hc{position:relative;z-index:1;padding:4.75rem 6%}
+.ab-hc h1{font-family:var(--fh);font-size:clamp(2.8rem,6vw,7rem);font-weight:900;line-height:.92;letter-spacing:-2px}
+.ab-hc h1 em{color:var(--red);font-style:normal}
+.sbar{display:flex;justify-content:space-around;flex-wrap:wrap;background:var(--red);padding:0}
+.sb{padding:2.1rem 1.85rem;text-align:center;position:relative;flex:1;min-width:140px}
+.sb::after{content:'';position:absolute;right:0;top:25%;bottom:25%;width:1px;background:rgba(255,255,255,.2)}
+.sb:last-child::after{display:none}
+.sb-n{font-family:var(--fh);font-size:2.35rem;font-weight:900;display:block;line-height:1}
+.sb-l{font-family:var(--fs);font-size:.67rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.68);margin-top:3px}
+.ab-story{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;padding:5.5rem 6%;align-items:center}
+.ab-iw{border-radius:var(--rlg);overflow:hidden;aspect-ratio:4/5;position:relative}
+.ab-iw img{width:100%;height:100%;object-fit:cover;display:block}
+.ab-ia{position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--red)}
+.ab-itg{position:absolute;top:1.4rem;right:-1.3rem;background:var(--red);color:var(--white);padding:.65rem 1.15rem;border-radius:var(--rsm);font-family:var(--fh);font-size:.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;box-shadow:0 6px 22px rgba(255,59,48,.38)}
+.tl-sec{background:var(--steel);padding:5.5rem 6%}
+.tl-list{margin-top:2.75rem;display:flex;flex-direction:column;position:relative}
+.tl-list::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),rgba(255,59,48,.1))}
+.tl-it{display:flex;gap:2.25rem;padding:1.85rem 0 1.85rem 2.25rem;border-bottom:1px solid rgba(255,255,255,.05);position:relative}
+.tl-it::before{content:'';position:absolute;left:-5px;top:2.4rem;width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:0 0 14px var(--red-glow)}
+.tl-yr{font-family:var(--fh);font-size:1.65rem;font-weight:900;color:var(--red);width:75px;flex-shrink:0;padding-top:.1rem}
+.tl-ct h3{font-family:var(--fs);font-size:.95rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:.45rem}
+.tl-ct p{font-size:.86rem;color:var(--muted);line-height:1.75}
+
+/* CONTACT */
+.ct-hero{padding-top:74px;background:var(--steel);position:relative;overflow:hidden}
+.ct-hero::before{content:'';position:absolute;top:-30%;left:-10%;width:480px;height:480px;background:radial-gradient(circle,rgba(255,59,48,.05),transparent 70%)}
+.ct-hi{padding:3.75rem 6% 2.75rem;position:relative}
+.ct-lay{display:grid;grid-template-columns:1fr 1.38fr;gap:3.75rem;padding:3.75rem 6% 5rem}
+.ct-di{display:flex;align-items:flex-start;gap:1.15rem;padding:1.4rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.ct-ic{width:48px;height:48px;flex-shrink:0;background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.cdl{font-family:var(--fs);font-size:.67rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.cdv{font-size:.9rem;color:rgba(255,255,255,.78);line-height:1.5}
+.ct-map{height:190px;background:rgba(255,255,255,.03);border:1px solid var(--card-b);border-radius:var(--r);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.65rem;color:var(--muted);font-size:.86rem;margin-top:1.4rem}
+.ct-form{background:rgba(255,255,255,.02);border:1px solid var(--card-b);border-radius:var(--rlg);padding:2.25rem}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:.9rem}
+.fg{margin-bottom:.9rem}
+.fl{display:block;font-family:var(--fs);font-size:.67rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:.55rem}
+.fi,.fta{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:var(--rsm);color:var(--white);padding:.84rem 1.05rem;font-size:.88rem;font-family:var(--fb);transition:border-color .3s}
+.fi:focus,.fta:focus{outline:none;border-color:rgba(255,59,48,.42)}
+.fi::placeholder,.fta::placeholder{color:var(--muted2)}
+.fta{min-height:125px;resize:vertical}
+.faq-w{padding:3.75rem 6% 5rem;background:var(--dark2)}
+.faq-it{border-bottom:1px solid rgba(255,255,255,.06)}
+.faq-q{width:100%;background:none;border:none;color:var(--white);font-family:var(--fs);font-size:.92rem;font-weight:700;text-align:left;padding:1.15rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:.9rem;transition:color .25s}
+.faq-q:hover{color:var(--red)}
+.faq-ar{width:26px;height:26px;border-radius:50%;background:var(--card);border:1px solid var(--card-b);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.72rem;transition:all .3s}
+.faq-it.op .faq-ar{background:var(--red);border-color:var(--red);transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;font-size:.86rem;color:var(--muted);line-height:1.8;transition:max-height .35s ease,padding .35s ease}
+.faq-it.op .faq-a{max-height:200px;padding-bottom:1.15rem}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.85rem;right:1.85rem;z-index:9999;background:var(--steel);border:1px solid var(--card-b);border-left:3px solid var(--red);border-radius:var(--r);padding:1rem 1.4rem;box-shadow:0 18px 55px rgba(0,0,0,.5),0 0 0 1px rgba(255,59,48,.09);backdrop-filter:blur(16px);transform:translateX(120%);transition:transform .4s var(--ease);max-width:300px}
+.toast.sh{transform:translateX(0)}
+.toast-h{display:flex;align-items:center;gap:.45rem;margin-bottom:2px}
+.toast-ic{font-size:.95rem}
+.toast-t{font-family:var(--fs);font-size:.85rem;font-weight:700}
+.toast-s{font-size:.76rem;color:var(--muted)}
+
+/* BACK TO TOP */
+#btt{position:fixed;bottom:1.85rem;left:1.85rem;z-index:900;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--red),#ff6535);color:var(--white);border:none;font-size:.95rem;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px var(--red-glow);cursor:pointer;opacity:0;transform:translateY(10px);transition:all .3s var(--ease)}
+#btt.vis{opacity:1;transform:none}
+#btt:hover{transform:translateY(-3px)!important;box-shadow:0 14px 36px rgba(255,59,48,.38)}
+
+/* FOOTER */
+footer{background:#020204;border-top:1px solid rgba(255,255,255,.05);padding:5.25rem 6% 1.85rem}
+.ft-g{display:grid;grid-template-columns:1.55fr 1fr 1fr 1fr;gap:2.75rem;margin-bottom:3.75rem}
+.ft-logo{font-family:var(--fh);font-size:1.9rem;font-weight:900;margin-bottom:.85rem;letter-spacing:1px}
+.ft-logo span{color:var(--red)}
+.ft-bp{font-size:.86rem;color:var(--muted);line-height:1.75;max-width:290px;margin-bottom:1.4rem}
+.ft-soc{display:flex;gap:.65rem}
+.fsc{width:36px;height:36px;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.88rem;transition:all .3s}
+.fsc:hover{background:var(--red);border-color:var(--red);transform:translateY(-2px)}
+.ft-ht{font-family:var(--fs);font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:1.4rem}
+.ft-ls{list-style:none;display:flex;flex-direction:column;gap:.68rem}
+.ft-ls a{font-size:.86rem;color:var(--muted);transition:color .25s}
+.ft-ls a:hover{color:var(--red)}
+.ft-bot{padding-top:1.85rem;border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.9rem}
+.ft-cp{font-size:.76rem;color:var(--muted2)}
+.pms{display:flex;gap:.45rem;flex-wrap:wrap}
+.pm{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:5px;padding:3px 9px;font-family:var(--fs);font-size:.62rem;font-weight:700;letter-spacing:.5px;color:var(--muted)}
+
+/* STICKY MOBILE CTA */
+.smcta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:800;background:rgba(5,5,5,.96);backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.08);padding:.9rem 5%;gap:.9rem;align-items:center}
+@media(max-width:768px){.smcta.sh{display:flex}}
+.sm-prc{font-family:var(--fh);font-size:1.45rem;font-weight:900}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .b-lay{grid-template-columns:1fr}
+  .ft-g{grid-template-columns:1fr 1fr}
+  .ab-story{grid-template-columns:1fr;gap:2.75rem}
+  .pd-g{grid-template-columns:1fr}
+  .pd-gal{position:static}
+  .p-lay{flex-direction:column}
+  .fsb{width:100%;position:static}
+  .pg3{grid-template-columns:repeat(2,1fr)}
+  .ct-lay{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hbg{display:flex}
+  .h-content{padding:0 5%;padding-top:78px}
+  .sec{padding:3.75rem 5%}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .prod-grid{grid-template-columns:1fr 1fr}
+  .ig-grid{grid-template-columns:repeat(3,1fr)}
+  .nl-in{flex-direction:column}
+  .sbar{flex-direction:column}
+  .sb::after{display:none}
+  .ab-story{padding:3rem 5%}
+  .pph-in{padding:2.75rem 5%}
+  .p-lay{padding:2rem 5%}
+  .pd-w{padding:4rem 5% 3rem}
+  .ct-hi,.ct-lay,.faq-w,.tl-sec{padding-left:5%;padding-right:5%}
+  .ft-g{grid-template-columns:1fr}
+  .ft-bot{flex-direction:column;text-align:center}
+  .fr{grid-template-columns:1fr}
+  .pd-ctas{flex-direction:column}
+  .h-trust{gap:1.25rem}
+  .t-div{display:none}
+  .tc{min-width:290px}
+  .loy-tiers{gap:.75rem}
+  .loy-tc{min-width:130px}
+}
+@media(max-width:480px){
+  .h-title{font-size:clamp(2.75rem,11vw,4.5rem)}
+  .h-ctas{flex-direction:column}
+  .btn-r,.btn-g{width:100%;justify-content:center}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .prod-grid{grid-template-columns:1fr}
+  .ig-grid{grid-template-columns:repeat(2,1fr)}
+  .pg3{grid-template-columns:1fr}
+}
+
+/* ══════════════════════════════════════════
+   SECTION BACKGROUNDS — Curated & Matched
+   Each image chosen to match its section's
+   purpose. All text layers sit at z-index:2+
+   All overlays are ::before pseudo-elements.
+══════════════════════════════════════════ */
+
+/* ── BASE RULE: every bg-section content above overlay ── */
+.bg-sec{position:relative}
+.bg-sec>*{position:relative;z-index:2}
+.bg-sec::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-size:cover;background-position:center;background-repeat:no-repeat}
+
+/* ── CATEGORIES — Luxury modern gym floor, open space ── */
+#cats{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+}
+#cats::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to bottom,rgba(4,4,8,.52) 0%,rgba(4,4,8,.68) 100%);
+}
+#cats .stag,#cats .sh,#cats .rv,#cats .cat-grid{position:relative;z-index:2}
+
+/* ── WHY FITBULLS — Barbell on floor, dark gym ── */
+#why{
+  position:relative;overflow:hidden;
+  background:url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+}
+#why::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(135deg,rgba(4,4,10,.55) 0%,rgba(4,4,10,.50) 100%);
+}
+#why .stag,#why .sh,#why .rv,#why .why-grid{position:relative;z-index:2}
+
+/* ── BESTSELLERS — Weight plates arranged in rack ── */
+#pg-home section[aria-labelledby="best-h"]{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+}
+#pg-home section[aria-labelledby="best-h"]::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:rgba(4,4,8,.58);
+}
+#pg-home section[aria-labelledby="best-h"] .stag,
+#pg-home section[aria-labelledby="best-h"] .sh,
+#pg-home section[aria-labelledby="best-h"] .rv,
+#pg-home section[aria-labelledby="best-h"] .prod-grid,
+#pg-home section[aria-labelledby="best-h"]>div{position:relative;z-index:2}
+
+/* ── TESTIMONIALS — Athlete training, moody gym lighting ── */
+#test{
+  position:relative;overflow:hidden;
+  background:url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+}
+#test::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to bottom,rgba(4,4,8,.55) 0%,rgba(4,4,8,.65) 100%);
+}
+#test .stag,#test .sh,#test .rv,#test .t-track-w,#test .c-ctrl{position:relative;z-index:2}
+
+/* ── BUNDLE BUILDER — Full gym setup, racks + barbells ── */
+#bundle{
+  position:relative;overflow:hidden;
+  background:url('https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+}
+#bundle::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(135deg,rgba(4,4,12,.58) 0%,rgba(8,4,8,.55) 100%);
+}
+#bundle .stag,#bundle .sh,#bundle .ssub,#bundle .rv,#bundle .b-lay{position:relative;z-index:2}
+
+/* ── LOYALTY — Premium dark gym, motivational scene ── */
+#loyalty{
+  position:relative;overflow:hidden;padding:5.5rem 6%;text-align:center;
+  background:url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1800&q=80&fit=crop&crop=top&sat=-100&con=30') center/cover no-repeat;
+}
+#loyalty::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to bottom,rgba(4,4,8,.54) 0%,rgba(10,2,2,.62) 100%);
+}
+#loyalty>*{position:relative;z-index:2}
+
+/* ── NEWSLETTER — Dumbbell curl, focused athlete ── */
+#nl{
+  position:relative;overflow:hidden;
+  background:url('https://images.unsplash.com/photo-1581009137042-c552e485697a?w=1800&q=80&fit=crop&sat=-100&con=30&crop=center') center/cover no-repeat;
+  padding:6.5rem 6%;
+}
+#nl::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(120deg,rgba(4,4,8,.68) 0%,rgba(30,4,4,.60) 60%,rgba(4,4,8,.65) 100%);
+}
+#nl>*{position:relative;z-index:2}
+.nl-in{position:relative;z-index:2}
+
+/* ── INSTAGRAM — Studio shot, equipment detail ── */
+#ig{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+  padding:5rem 6%;
+}
+#ig::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:rgba(4,4,8,.55);
+}
+#ig>*{position:relative;z-index:2}
+
+/* ── PRODUCTS HERO — Athlete squatting heavy ── */
+.pph{
+  padding-top:74px;position:relative;
+  background:url('https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=1800&q=80&fit=crop&crop=top&sat=-100&con=30') center/cover no-repeat;
+}
+.pph::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to right,rgba(4,4,8,.78) 0%,rgba(4,4,8,.45) 60%,rgba(4,4,8,.25) 100%);
+}
+.pph-in{position:relative;z-index:2}
+
+/* ── PRODUCTS GRID AREA — Subtle dark, let cards breathe ── */
+.p-lay{
+  background:var(--dark2);
+  position:relative;
+}
+
+/* ── PRODUCT DETAIL — Close-up equipment texture ── */
+.pd-w{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1800&q=80&fit=crop&crop=top&sat=-100&con=30') top center/cover no-repeat fixed;
+}
+.pd-w::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:rgba(4,4,8,.60);
+}
+.pd-w>*{position:relative;z-index:2}
+
+/* ── ABOUT HERO — handled inline via .ab-hero class ── */
+
+/* ── ABOUT STORY — Subtle dark gradient, let image shine ── */
+.ab-story{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+  display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;padding:5.5rem 6%;align-items:center;
+}
+.ab-story::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:rgba(4,4,8,.56);
+}
+.ab-story>div{position:relative;z-index:2}
+
+/* ── STATS BAR — Powerlifting scene, red wash ── */
+.sbar{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+  display:flex;justify-content:space-around;flex-wrap:wrap;
+}
+.sbar::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:rgba(200,20,10,.78);
+}
+.sbar>*{position:relative;z-index:2}
+
+/* ── TIMELINE — Cable machine / gym equipment scene ── */
+.tl-sec{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1576678927484-cc907957088c?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+  padding:5.5rem 6%;
+}
+.tl-sec::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(135deg,rgba(4,4,10,.58) 0%,rgba(4,4,10,.54) 100%);
+}
+.tl-sec .stag,.tl-sec .sh,.tl-sec .tl-list{position:relative;z-index:2}
+
+/* ── CONTACT HERO — Modern cardio / treadmill zone ── */
+.ct-hero{
+  padding-top:74px;position:relative;overflow:hidden;
+  background:url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+}
+.ct-hero::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to right,rgba(4,4,8,.62) 0%,rgba(4,4,8,.42) 100%);
+}
+.ct-hi{position:relative;z-index:2;padding:3.75rem 6% 2.75rem}
+
+/* ── CONTACT LAYOUT — Clean dark, form focus ── */
+.ct-lay{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+  display:grid;grid-template-columns:1fr 1.38fr;gap:3.75rem;padding:3.75rem 6% 5rem;
+}
+.ct-lay::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:rgba(4,4,8,.60);
+}
+.ct-lay>*{position:relative;z-index:2}
+
+/* ── FAQ SECTION — Luxury gym interior, premium feel ── */
+.faq-w{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1570829460005-c840387bb1ca?w=1800&q=80&fit=crop&crop=center&sat=-100&con=30') center/cover no-repeat;
+  padding:3.75rem 6% 5rem;
+}
+.faq-w::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:rgba(4,4,8,.58);
+}
+.faq-w .stag,.faq-w .sh,.faq-w .faq-it{position:relative;z-index:2}
+
+/* ── FOOTER — Deep dark gym atmosphere ── */
+footer{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=80&fit=crop&crop=bottom&sat=-100&con=30') bottom center/cover no-repeat;
+  border-top:1px solid rgba(255,255,255,.05);padding:5.25rem 6% 1.85rem;
+}
+footer::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:rgba(2,2,6,.92);
+}
+footer>*{position:relative;z-index:2}
+
+
+/* ══════════════════════════════════════
+   GLOBAL B&W THEME — All backgrounds
+   grayscale so brand red pops perfectly
+══════════════════════════════════════ */
+
+/* Category card images — grayscale + darken */
+.cat-img{
+  filter:grayscale(100%) brightness(1.1) contrast(1.15);
+  transition:filter .55s ease,transform .55s ease;
+}
+.cat-card:hover .cat-img{
+  filter:grayscale(90%) brightness(1.12) contrast(1.1);
+}
+
+/* All product & gallery images — grayscale */
+.pi img,.pd-mi img,.pd-th img,.ig-c img,.ab-iw img{
+  filter:grayscale(100%) brightness(1.05) contrast(1.1);
+  transition:filter .4s ease,transform .55s ease;
+}
+.pc:hover .pi img{
+  filter:grayscale(85%) brightness(1.1) contrast(1.08);
+}
+.ig-c:hover img{
+  filter:grayscale(70%) brightness(1.08);
+}
+
+/* About hero */
+.ab-hero{
+  filter:none; /* keep layout, apply via pseudo below */
+}
+.ab-hero::after{
+  /* already handles overlay, image itself needs grayscale */
+}
+
+/* Apply grayscale to all section bg images via isolation trick */
+#cats,#why,#test,#bundle,#loyalty,#nl,#ig,
+.pph,.p-lay,.pd-w,.ab-story,.sbar,
+.tl-sec,.ct-hero,.ct-lay,.faq-w,footer,
+#pg-home section[aria-labelledby="best-h"]{
+  isolation:isolate;
+}
+
+/* Pseudo-element background with grayscale filter for each section */
+#cats::after,
+#why::after,
+#test::after,
+#bundle::after,
+#loyalty::after,
+#nl::after,
+#ig::after,
+.pph::after,
+.pd-w::after,
+.ab-story::after,
+.tl-sec::after,
+.ct-hero::after,
+.ct-lay::after,
+.faq-w::after,
+footer::after{
+  filter:grayscale(100%) brightness(1.0) contrast(1.1) !important;
+}
+
+/* Simpler approach: use backdrop-filter + mix-blend on a wrapper */
+/* Actually cleanest: CSS filter on a ::bg pseudo using clip */
+/* Best real approach: add grayscale filter directly on sections
+   but since background-image can't be filtered alone without
+   a child element, we use a helper class on each */
+
+/* Override: add grayscale pseudo-layer behind each bg section */
+.gbw{position:relative}
+.gbw::after{
+  content:'';
+  position:absolute;inset:0;
+  background:inherit;
+  background-attachment:inherit;
+  filter:grayscale(100%) brightness(1.08) contrast(1.15);
+  z-index:0;
+}
+.gbw>.gbw-ov{position:relative;z-index:1}
+
+@media(max-width:1100px){
+  .ab-story{grid-template-columns:1fr;gap:2.75rem}
+  .ct-lay{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .ab-story{padding:3rem 5%}
+  .ct-hi,.tl-sec,.faq-w{padding-left:5%;padding-right:5%}
+}
+</style>
+</head>
+<body>
+<div id="sp"></div>
+<button id="btt" aria-label="Back to top">↑</button>
+<div class="toast" id="toast" role="status" aria-live="polite"><div class="toast-h"><span class="toast-ic" id="tic"></span><span class="toast-t" id="tt"></span></div><div class="toast-s" id="ts"></div></div>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="logo">FIT<span>BULLS</span></div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="gp('home')" id="nl-home" class="act">Home</a></li>
+    <li><a href="#" onclick="gp('products')" id="nl-products">Shop</a></li>
+    <li><a href="#" onclick="gp('about')" id="nl-about">About</a></li>
+    <li><a href="#" onclick="gp('contact')" id="nl-contact">Contact</a></li>
+  </ul>
+  <div class="nav-acts">
+    <button class="nib" onclick="st('🔍','Search','Search coming soon!')">🔍</button>
+    <button class="nib" onclick="st('♥','Wishlist','Wishlist coming soon!')">♥</button>
+    <button class="nib" onclick="st('🛒','Cart','2 items — $608')">🛒<span class="cdot"></span></button>
+    <button class="hbg" id="hbg" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<nav class="mob-menu" id="mobMenu">
+  <a href="#" onclick="gp('home')">Home</a>
+  <a href="#" onclick="gp('products')">Shop</a>
+  <a href="#" onclick="gp('about')">About</a>
+  <a href="#" onclick="gp('contact')">Contact</a>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<div id="pg-home" class="pg act">
+<section id="hero" aria-label="Hero">
+  <div class="h-bg" id="hbg2"></div>
+  <div class="h-ov1" aria-hidden="true"></div>
+  <div class="h-ov2" aria-hidden="true"></div>
+
+  <div class="h-accent" aria-hidden="true"></div>
+  <div class="h-content">
+    <div class="h-eye"><span class="h-ep" aria-hidden="true"></span>Premium Gym Equipment — Est. 2020</div>
+    <h1 class="h-title">BUILD<br><span class="hl2">STRENGTH</span><br>WITHOUT<br>LIMITS</h1>
+    <p class="h-sub">Premium gym equipment engineered for athletes, home gyms, and fitness enthusiasts who demand performance without compromise.</p>
+    <div class="h-ctas">
+      <button class="btn-r" onclick="gp('products')">Shop Equipment →</button>
+      <button class="btn-g" onclick="document.getElementById('cats').scrollIntoView({behavior:'smooth'})">Explore Collections</button>
+    </div>
+    <div class="h-trust">
+      <div><div class="t-num"><span class="counter" data-t="10000">0</span>+</div><div class="t-lbl">Happy Athletes</div></div>
+      <div class="t-div" aria-hidden="true"></div>
+      <div><div class="t-num"><span class="counter" data-t="500">0</span>+</div><div class="t-lbl">Products</div></div>
+      <div class="t-div" aria-hidden="true"></div>
+      <div><div class="t-num">4.9★</div><div class="t-lbl">Avg Rating</div></div>
+      <div class="t-div" aria-hidden="true"></div>
+      <div><div class="t-num">30-Day</div><div class="t-lbl">Returns</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span>Scroll</span><div class="sw"></div></div>
+</section>
+
+<section class="sec" id="cats" aria-labelledby="cat-h">
+  <div class="stag">Shop by Category</div>
+  <h2 class="sh rv" id="cat-h">Choose Equipment That<br><span class="hl">Powers Your Performance</span></h2>
+  <div class="cat-grid">
+    <div class="cat-card rv d1" onclick="gp('products')" tabindex="0" role="button" aria-label="Barbells">
+      <div class="cat-img" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80&fit=crop&sat=-100&con=30')"></div>
+      <div class="cat-ov"></div>
+      <div class="cat-body"><div class="cat-ico" aria-hidden="true">🏋️</div><div class="cat-name">Barbells</div><div class="cat-cnt">48 products</div><div class="cat-arr">Shop Now →</div></div>
+    </div>
+    <div class="cat-card rv d2" onclick="gp('products')" tabindex="0" role="button" aria-label="Dumbbells">
+      <div class="cat-img" style="background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&fit=crop&sat=-100&con=30')"></div>
+      <div class="cat-ov"></div>
+      <div class="cat-body"><div class="cat-ico" aria-hidden="true">💪</div><div class="cat-name">Dumbbells</div><div class="cat-cnt">62 products</div><div class="cat-arr">Shop Now →</div></div>
+    </div>
+    <div class="cat-card rv d3" onclick="gp('products')" tabindex="0" role="button" aria-label="Power Racks">
+      <div class="cat-img" style="background-image:url('https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=600&q=80&fit=crop&sat=-100&con=30')"></div>
+      <div class="cat-ov"></div>
+      <div class="cat-body"><div class="cat-ico" aria-hidden="true">🏗️</div><div class="cat-name">Power Racks</div><div class="cat-cnt">24 products</div><div class="cat-arr">Shop Now →</div></div>
+    </div>
+    <div class="cat-card rv d4" onclick="gp('products')" tabindex="0" role="button" aria-label="Cardio">
+      <div class="cat-img" style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80&fit=crop&sat=-100&con=30')"></div>
+      <div class="cat-ov"></div>
+      <div class="cat-body"><div class="cat-ico" aria-hidden="true">🏃</div><div class="cat-name">Cardio</div><div class="cat-cnt">38 products</div><div class="cat-arr">Shop Now →</div></div>
+    </div>
+    <div class="cat-card rv d4" onclick="gp('products')" tabindex="0" role="button" aria-label="Accessories">
+      <div class="cat-img" style="background-image:url('https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=600&q=80&fit=crop&sat=-100&con=30')"></div>
+      <div class="cat-ov"></div>
+      <div class="cat-body"><div class="cat-ico" aria-hidden="true">🎽</div><div class="cat-name">Accessories</div><div class="cat-cnt">130 products</div><div class="cat-arr">Shop Now →</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="sec" aria-labelledby="why-h">
+  <div class="stag">Our Promise</div>
+  <h2 class="sh rv" id="why-h">Why Thousands of Athletes<br><span class="hl">Trust FitBulls</span></h2>
+  <div class="why-grid">
+    <div class="why-card rv d1"><div class="why-ico" aria-hidden="true">⚡</div><div class="why-t">Military-Grade Construction</div><p class="why-d">Every product is stress-tested beyond industry standards. Our steel is sourced from the same mills that supply professional sports franchises worldwide.</p></div>
+    <div class="why-card rv d2"><div class="why-ico" aria-hidden="true">🛡️</div><div class="why-t">Lifetime Structural Warranty</div><p class="why-d">We stand behind every weld, every bolt, every knurl. If it fails under normal use, we replace it — no questions asked, no paperwork required.</p></div>
+    <div class="why-card rv d3"><div class="why-ico" aria-hidden="true">🚀</div><div class="why-t">Free 2-Day Shipping</div><p class="why-d">Orders over $150 ship free within 2 business days. White-glove in-room delivery available for large equipment at checkout.</p></div>
+    <div class="why-card rv d4"><div class="why-ico" aria-hidden="true">🔄</div><div class="why-t">Risk-Free 30-Day Returns</div><p class="why-d">Try your gear for a full month. If it's not the right fit, we send a prepaid label and refund you completely — no fine print, no restocking fees.</p></div>
+  </div>
+</section>
+
+<section class="sec" style="background:var(--dark2)" aria-labelledby="best-h">
+  <div class="stag">Most Popular</div>
+  <h2 class="sh rv" id="best-h">Best Sellers</h2>
+  <div class="prod-grid">
+    <div class="pc rv d1" onclick="gpd(1)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80&fit=crop&sat=-100&con=30" alt="Pro Olympic Barbell" loading="lazy"><div class="pb"><span class="pbg pbg-h">🔥 Bestseller</span></div><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Pro Olympic Barbell')">+ Add to Cart</button><button class="pa-w" onclick="event.stopPropagation();wl('Pro Olympic Barbell')">♥ Wishlist</button></div></div><div class="pinfo"><div class="pname">Pro Olympic Barbell</div><div class="pstars"><span class="st">★★★★★</span><span class="sc">(847)</span></div><div class="ppr"><span class="pcur">$289</span></div></div></div>
+    <div class="pc rv d2" onclick="gpd(2)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80&fit=crop&sat=-100&con=30" alt="Adjustable Dumbbell Set" loading="lazy"><div class="pb"><span class="pbg pbg-n">✨ New</span><span class="pbg pbg-s">Save 20%</span></div><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Adjustable Dumbbell Set')">+ Add to Cart</button><button class="pa-w" onclick="event.stopPropagation();wl('Adjustable Dumbbell Set')">♥ Wishlist</button></div></div><div class="pinfo"><div class="pname">Adjustable Dumbbell Set</div><div class="pstars"><span class="st">★★★★★</span><span class="sc">(1,204)</span></div><div class="ppr"><span class="pcur">$319</span><span class="pold">$399</span><span class="psave">Save $80</span></div></div></div>
+    <div class="pc rv d3" onclick="gpd(3)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=500&q=80&fit=crop&sat=-100&con=30" alt="Bull Power Rack" loading="lazy"><div class="pb"><span class="pbg pbg-h">🔥 Bestseller</span></div><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Bull Power Rack')">+ Add to Cart</button><button class="pa-w" onclick="event.stopPropagation();wl('Bull Power Rack')">♥ Wishlist</button></div></div><div class="pinfo"><div class="pname">Bull Power Rack</div><div class="pstars"><span class="st">★★★★★</span><span class="sc">(563)</span></div><div class="ppr"><span class="pcur">$899</span></div></div></div>
+    <div class="pc rv d4" onclick="gpd(4)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&q=80&fit=crop&sat=-100&con=30" alt="Kettlebell Set" loading="lazy"><div class="pb"><span class="pbg pbg-s">Sale</span></div><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Kettlebell Set')">+ Add to Cart</button><button class="pa-w" onclick="event.stopPropagation();wl('Kettlebell Set')">♥ Wishlist</button></div></div><div class="pinfo"><div class="pname">Cast Iron Kettlebell Set</div><div class="pstars"><span class="st">★★★★☆</span><span class="sc">(329)</span></div><div class="ppr"><span class="pcur">$149</span><span class="pold">$189</span><span class="psave">Save $40</span></div></div></div>
+  </div>
+  <div style="text-align:center;margin-top:2.75rem"><button class="btn-r" onclick="gp('products')">View All Products →</button></div>
+</section>
+
+<section id="test" class="sec" aria-labelledby="test-h">
+  <div class="stag">Social Proof</div>
+  <h2 class="sh rv" id="test-h">Real Athletes,<br><span class="hl">Real Results</span></h2>
+  <div class="t-track-w"><div class="t-track" id="ttrack">
+    <div class="tc">
+      <div class="tc-left">
+        <div class="tc-stars">★★★★★ <span class="ver">✓ Verified Purchase</span></div>
+        <p class="tc-txt">"The Pro Barbell is an absolute beast. Six months of daily use — zero knurling wear, zero sleeve wobble. This replaced my $650 Rogue bar and I couldn't be happier. FitBulls just earned a customer for life."</p>
+        <div class="tc-auth"><div class="av">MK</div><div><div class="an">Marcus K.</div><div class="ar">Powerlifter · Chicago, IL</div></div></div>
+      </div>
+      <div class="tc-right"><div class="tc-rating-big">4.9</div><div class="tc-rating-stars">★★★★★</div><div class="tc-rating-label">Out of 5</div></div>
+    </div>
+    <div class="tc">
+      <div class="tc-left">
+        <div class="tc-stars">★★★★★ <span class="ver">✓ Verified Purchase</span></div>
+        <p class="tc-txt">"Complete home gym with FitBulls gear. The rack welds are immaculate, the powder coat is flawless, and the setup looks better than most commercial gyms I've trained at."</p>
+        <div class="tc-auth"><div class="av">SR</div><div><div class="an">Sarah R.</div><div class="ar">CrossFit Athlete · Austin, TX</div></div></div>
+      </div>
+      <div class="tc-right"><div class="tc-rating-big">5.0</div><div class="tc-rating-stars">★★★★★</div><div class="tc-rating-label">Out of 5</div></div>
+    </div>
+    <div class="tc">
+      <div class="tc-left">
+        <div class="tc-stars">★★★★★ <span class="ver">✓ Verified Purchase</span></div>
+        <p class="tc-txt">"I've tried Rogue, Titan, and Rep Fitness. FitBulls goes toe-to-toe with all of them at a significantly better price. Customer support is genuinely exceptional — they actually pick up the phone."</p>
+        <div class="tc-auth"><div class="av">DJ</div><div><div class="an">Derek J.</div><div class="ar">Competitive Bodybuilder · Miami, FL</div></div></div>
+      </div>
+      <div class="tc-right"><div class="tc-rating-big">4.9</div><div class="tc-rating-stars">★★★★★</div><div class="tc-rating-label">Out of 5</div></div>
+    </div>
+    <div class="tc">
+      <div class="tc-left">
+        <div class="tc-stars">★★★★★ <span class="ver">✓ Verified Purchase</span></div>
+        <p class="tc-txt">"The adjustable dumbbells transformed my home workouts. Locking mechanism is rock solid — no wobble, no slippage, even under heavy load. This is the only set my clients ask about."</p>
+        <div class="tc-auth"><div class="av">AL</div><div><div class="an">Amanda L.</div><div class="ar">NASM-Certified Trainer · New York, NY</div></div></div>
+      </div>
+      <div class="tc-right"><div class="tc-rating-big">5.0</div><div class="tc-rating-stars">★★★★★</div><div class="tc-rating-label">Out of 5</div></div>
+    </div>
+  </div></div>
+  <div class="c-ctrl"><button class="cb" onclick="moveC(-1)" aria-label="Previous">←</button><div class="cdots" id="cdots"><div class="cdot2 act" onclick="goC(0)"></div><div class="cdot2" onclick="goC(1)"></div><div class="cdot2" onclick="goC(2)"></div><div class="cdot2" onclick="goC(3)"></div></div><button class="cb" onclick="moveC(1)" aria-label="Next">→</button></div>
+</section>
+
+<section id="bundle" class="sec" aria-labelledby="bund-h">
+  <div class="stag">Configurator</div>
+  <h2 class="sh rv" id="bund-h">Design Your<br><span class="hl">Dream Home Gym</span></h2>
+  <p class="ssub rv">Select equipment that fits your goals. Bundles of 3+ items unlock a 12% discount automatically.</p>
+  <div class="b-lay">
+    <div class="b-items">
+      <div class="b-item sel" id="bi-rack" onclick="tbi('rack',899,'Bull Power Rack')"><div class="b-chk"></div><div class="b-em">🏗️</div><div class="b-inf"><div class="b-nm">Bull Power Rack</div><div class="b-ds">Foundation of any serious setup — 1,000 lb rated</div></div><div class="b-pr">$899</div></div>
+      <div class="b-item sel" id="bi-bar" onclick="tbi('bar',289,'Pro Olympic Barbell')"><div class="b-chk"></div><div class="b-em">🏋️</div><div class="b-inf"><div class="b-nm">Pro Olympic Barbell</div><div class="b-ds">185,000 PSI tensile strength — dual-zone knurling</div></div><div class="b-pr">$289</div></div>
+      <div class="b-item" id="bi-plates" onclick="tbi('plates',249,'Weight Plate Set')"><div class="b-chk"></div><div class="b-em">⚖️</div><div class="b-inf"><div class="b-nm">Weight Plate Set (300 lbs)</div><div class="b-ds">Calibrated steel — 5 to 45 lb pairs included</div></div><div class="b-pr">$249</div></div>
+      <div class="b-item" id="bi-dumbs" onclick="tbi('dumbs',319,'Adjustable Dumbbell Set')"><div class="b-chk"></div><div class="b-em">💪</div><div class="b-inf"><div class="b-nm">Adjustable Dumbbell Set</div><div class="b-ds">5–50 lbs with quick-release locking mechanism</div></div><div class="b-pr">$319</div></div>
+      <div class="b-item" id="bi-bench" onclick="tbi('bench',379,'Flat/Incline Bench')"><div class="b-chk"></div><div class="b-em">🪑</div><div class="b-inf"><div class="b-nm">Flat / Incline Bench</div><div class="b-ds">7-position adjustable — 1,200 lb static capacity</div></div><div class="b-pr">$379</div></div>
+      <div class="b-item" id="bi-mat" onclick="tbi('mat',89,'Rubber Gym Flooring')"><div class="b-chk"></div><div class="b-em">📐</div><div class="b-inf"><div class="b-nm">Rubber Gym Flooring</div><div class="b-ds">4×6 ft tiles — 3/4" thick, noise-absorbing</div></div><div class="b-pr">$89</div></div>
+    </div>
+    <div class="b-sum" aria-live="polite">
+      <div class="b-sum-t">🏠 Your Home Gym</div>
+      <div id="blines"></div>
+      <div class="b-disc" id="bdiscrow" style="display:none"><span style="color:var(--green);font-weight:600">🎉 Bundle Discount (12%)</span><span id="bdiscval" style="color:var(--green);font-weight:700"></span></div>
+      <div class="b-tot"><span class="b-tot-l">Total</span><span class="b-tot-v" id="btotval">$0</span></div>
+      <div id="btip" style="font-size:.76rem;color:var(--muted);margin-top:.65rem;text-align:center"></div>
+      <button class="btn-r" style="width:100%;justify-content:center;margin-top:1.4rem" onclick="abundle()">Add Bundle to Cart →</button>
+    </div>
+  </div>
+</section>
+
+<section id="loyalty" aria-labelledby="loy-h">
+  <div class="loy-badge rv" aria-hidden="true">🐂</div>
+  <div class="stag" style="justify-content:center">Membership</div>
+  <h2 class="loy-title rv" id="loy-h">Join the<br><span class="loy-gld">FitBulls Pack</span></h2>
+  <p class="loy-sub rv">Earn points with every purchase. Unlock exclusive discounts, early access to new drops, and members-only releases.</p>
+  <div class="loy-tiers rv">
+    <div class="loy-tc"><div class="lt-em">⚪</div><div class="lt-nm">Recruit</div><div class="lt-sp">$0 – $499</div><div class="lt-pk">5% back in points</div></div>
+    <div class="loy-tc"><div class="lt-em">🟤</div><div class="lt-nm">Fighter</div><div class="lt-sp">$500 – $999</div><div class="lt-pk">8% back + early access</div></div>
+    <div class="loy-tc"><div class="lt-em">⚫</div><div class="lt-nm">Warrior</div><div class="lt-sp">$1,000 – $2,499</div><div class="lt-pk">12% back + free shipping</div></div>
+    <div class="loy-tc"><div class="lt-em">🐂</div><div class="lt-nm">Bull</div><div class="lt-sp">$2,500+</div><div class="lt-pk">15% back + VIP drops</div></div>
+  </div>
+  <div style="text-align:center"><button class="btn-r" style="font-size:.95rem;padding:1.05rem 2.4rem" onclick="st('🐂','Joined!','Welcome to the FitBulls Pack. Let the gains begin.')">Join Free — Start Earning</button></div>
+</section>
+
+<section id="nl" aria-labelledby="nl-h">
+  <div class="nl-in">
+    <div>
+      <div class="stag">Stay in the Loop</div>
+      <h2 class="sh" id="nl-h">Join the Herd.<br>Train Smarter.</h2>
+      <p style="color:var(--muted);font-size:.95rem;max-width:380px;line-height:1.72;margin-top:.5rem">Exclusive deals, early product drops, and programming tips. No spam — just gains.</p>
+    </div>
+    <form class="nl-form" onsubmit="hnl(event)">
+      <input class="nl-inp" type="text" placeholder="Your name" aria-label="Name">
+      <input class="nl-inp" type="email" placeholder="your@email.com" required aria-label="Email">
+      <button class="btn-r" type="submit" style="justify-content:center;padding:1rem">Subscribe — It's Free</button>
+      <div class="nl-disc">No spam, ever. Unsubscribe anytime. 10,000+ athletes already subscribed.</div>
+    </form>
+  </div>
+</section>
+
+<section id="ig" aria-labelledby="ig-h">
+  <div class="stag">@FitBulls</div>
+  <h2 class="sh rv" id="ig-h">Tag Us &amp; Get Featured</h2>
+  <div class="ig-grid">
+    <div class="ig-c"><img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=300&q=80&fit=crop&sat=-100&con=30" alt="Athlete training" loading="lazy"><div class="ig-ov" aria-hidden="true">♥ 2.4k</div></div>
+    <div class="ig-c"><img src="https://images.unsplash.com/photo-1581009137042-c552e485697a?w=300&q=80&fit=crop&sat=-100&con=30" alt="Heavy deadlift" loading="lazy"><div class="ig-ov" aria-hidden="true">♥ 3.1k</div></div>
+    <div class="ig-c"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=300&q=80&fit=crop&sat=-100&con=30" alt="Home gym setup" loading="lazy"><div class="ig-ov" aria-hidden="true">♥ 1.9k</div></div>
+    <div class="ig-c"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&q=80&fit=crop&sat=-100&con=30" alt="Squat session" loading="lazy"><div class="ig-ov" aria-hidden="true">♥ 4.2k</div></div>
+    <div class="ig-c"><img src="https://images.unsplash.com/photo-1590487988256-9ed24133863e?w=300&q=80&fit=crop&sat=-100&con=30" alt="Dumbbell curl" loading="lazy"><div class="ig-ov" aria-hidden="true">♥ 2.7k</div></div>
+    <div class="ig-c"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&q=80&fit=crop&sat=-100&con=30" alt="Bench press" loading="lazy"><div class="ig-ov" aria-hidden="true">♥ 5.6k</div></div>
+  </div>
+  <p class="ig-hnd">Follow us at <a href="#" aria-label="FitBulls Instagram">@fitbulls</a> — use #FitBullsStrong to get featured</p>
+</section>
+</div><!-- /home -->
+<!-- ═══ PRODUCTS ═══ -->
+<div id="pg-products" class="pg">
+<div class="pph"><div class="pph-in"><div class="stag">All Equipment</div><h1 class="sh">The Full Arsenal</h1><p style="color:var(--muted);font-size:.95rem;margin-top:.45rem">500+ products built for athletes who demand the best.</p></div></div>
+<div class="p-lay">
+  <aside class="fsb" aria-label="Filters">
+    <div class="fs-sec"><div class="fs-h">Category</div>
+      <label class="fck"><input type="checkbox" checked><span>All Products</span></label>
+      <label class="fck"><input type="checkbox"><span>Barbells (48)</span></label>
+      <label class="fck"><input type="checkbox"><span>Dumbbells (62)</span></label>
+      <label class="fck"><input type="checkbox"><span>Power Racks (24)</span></label>
+      <label class="fck"><input type="checkbox"><span>Cardio (38)</span></label>
+      <label class="fck"><input type="checkbox"><span>Accessories (130)</span></label>
+    </div>
+    <div class="fs-sec"><div class="fs-h">Price Range</div>
+      <input type="range" class="f-range" min="0" max="2000" value="1000" aria-label="Max price" oninput="document.getElementById('pmx').textContent='$'+this.value">
+      <div class="f-pdsp"><span>$0</span><span id="pmx">$1000</span></div>
+    </div>
+    <div class="fs-sec"><div class="fs-h">Brand</div>
+      <label class="fck"><input type="checkbox" checked><span>FitBulls</span></label>
+      <label class="fck"><input type="checkbox"><span>BullStrength</span></label>
+      <label class="fck"><input type="checkbox"><span>IronCore</span></label>
+    </div>
+    <div class="fs-sec"><div class="fs-h">Rating</div>
+      <label class="fck"><input type="checkbox"><span>★★★★★ 5 stars</span></label>
+      <label class="fck"><input type="checkbox"><span>★★★★☆ 4+ stars</span></label>
+    </div>
+    <button class="btn-r" style="width:100%;justify-content:center" onclick="st('✅','Filters Applied','Showing 24 results')">Apply Filters</button>
+  </aside>
+  <main class="pm" aria-label="Products">
+    <div class="tb">
+      <span class="tb-cnt">Showing <strong style="color:var(--white)">24</strong> of 302 products</span>
+      <div class="tb-r">
+        <button class="vb act" title="Grid" aria-label="Grid view">⊞</button>
+        <button class="vb" title="List" aria-label="List view">☰</button>
+        <select class="ss" aria-label="Sort"><option>Featured</option><option>Price: Low to High</option><option>Price: High to Low</option><option>Best Rated</option><option>Newest</option></select>
+      </div>
+    </div>
+    <div class="pg3">
+      <div class="pc" onclick="gpd(1)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80&fit=crop&sat=-100&con=30" alt="Pro Olympic Barbell" loading="lazy"><div class="pb"><span class="pbg pbg-h">🔥 Bestseller</span></div><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Pro Olympic Barbell')">+ Add to Cart</button><button class="pa-w" onclick="event.stopPropagation();wl('Pro Olympic Barbell')">♥ Wishlist</button></div></div><div class="pinfo"><div class="pname">Pro Olympic Barbell</div><div class="pstars"><span class="st">★★★★★</span><span class="sc">(847)</span></div><div class="ppr"><span class="pcur">$289</span></div></div></div>
+      <div class="pc" onclick="gpd(2)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80&fit=crop&sat=-100&con=30" alt="Adjustable Dumbbell Set" loading="lazy"><div class="pb"><span class="pbg pbg-n">✨ New</span></div><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Dumbbell Set')">+ Add to Cart</button><button class="pa-w" onclick="event.stopPropagation();wl('Dumbbell Set')">♥ Wishlist</button></div></div><div class="pinfo"><div class="pname">Adjustable Dumbbell Set</div><div class="pstars"><span class="st">★★★★★</span><span class="sc">(1,204)</span></div><div class="ppr"><span class="pcur">$319</span><span class="pold">$399</span></div></div></div>
+      <div class="pc" onclick="gpd(3)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=400&q=80&fit=crop&sat=-100&con=30" alt="Bull Power Rack" loading="lazy"><div class="pb"><span class="pbg pbg-h">🔥 Bestseller</span></div><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Bull Power Rack')">+ Add to Cart</button><button class="pa-w" onclick="event.stopPropagation();wl('Bull Power Rack')">♥</button></div></div><div class="pinfo"><div class="pname">Bull Power Rack</div><div class="pstars"><span class="st">★★★★★</span><span class="sc">(563)</span></div><div class="ppr"><span class="pcur">$899</span></div></div></div>
+      <div class="pc" onclick="gpd(4)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=80&fit=crop&sat=-100&con=30" alt="Kettlebell Set" loading="lazy"><div class="pb"><span class="pbg pbg-s">Sale</span></div><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Kettlebell Set')">+ Add to Cart</button><button class="pa-w" onclick="event.stopPropagation();wl('Kettlebell Set')">♥</button></div></div><div class="pinfo"><div class="pname">Cast Iron Kettlebell Set</div><div class="pstars"><span class="st">★★★★☆</span><span class="sc">(329)</span></div><div class="ppr"><span class="pcur">$149</span><span class="pold">$189</span></div></div></div>
+      <div class="pc" onclick="gpd(5)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=400&q=80&fit=crop&sat=-100&con=30" alt="FDB Bench" loading="lazy"><div class="pb"><span class="pbg pbg-n">✨ New</span></div><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('FDB Bench')">+ Add to Cart</button><button class="pa-w" onclick="event.stopPropagation();wl('FDB Bench')">♥</button></div></div><div class="pinfo"><div class="pname">Flat / Incline FDB Bench</div><div class="pstars"><span class="st">★★★★★</span><span class="sc">(411)</span></div><div class="ppr"><span class="pcur">$379</span></div></div></div>
+      <div class="pc" onclick="gpd(6)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=400&q=80&fit=crop&sat=-100&con=30" alt="Resistance Bands" loading="lazy"><div class="pb"><span class="pbg pbg-s">29% off</span></div><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Resistance Bands')">+ Add to Cart</button><button class="pa-w" onclick="event.stopPropagation();wl('Resistance Bands')">♥</button></div></div><div class="pinfo"><div class="pname">Resistance Band Set (5pc)</div><div class="pstars"><span class="st">★★★★☆</span><span class="sc">(726)</span></div><div class="ppr"><span class="pcur">$49</span><span class="pold">$69</span></div></div></div>
+    </div>
+  </main>
+</div>
+</div>
+
+<!-- ═══ PRODUCT DETAIL ═══ -->
+<div id="pg-product-detail" class="pg">
+<div style="padding-top:74px;background:var(--dark2)">
+<div class="pd-w">
+  <button class="back-b" onclick="gp('products')">← Back to Shop</button>
+  <div class="pd-g">
+    <div class="pd-gal">
+      <div class="pd-mi"><img id="pdmi" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=700&q=80&fit=crop&sat=-100&con=30" alt="Pro Olympic Barbell"></div>
+      <div class="pd-ths">
+        <div class="pd-th act" onclick="pdt(0,this)" tabindex="0"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&q=80&fit=crop&sat=-100&con=30" alt="View 1"></div>
+        <div class="pd-th" onclick="pdt(1,this)" tabindex="0"><img src="https://images.unsplash.com/photo-1581009137042-c552e485697a?w=200&q=80&fit=crop&sat=-100&con=30" alt="View 2"></div>
+        <div class="pd-th" onclick="pdt(2,this)" tabindex="0"><img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=200&q=80&fit=crop&sat=-100&con=30" alt="View 3"></div>
+        <div class="pd-th" onclick="pdt(3,this)" tabindex="0"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=200&q=80&fit=crop&sat=-100&con=30" alt="View 4"></div>
+      </div>
+    </div>
+    <div>
+      <div class="pd-cat">Barbells</div>
+      <h1 class="pd-nm">Pro Olympic Barbell</h1>
+      <div class="pd-rat"><span class="pd-sts">★★★★★</span><span class="pd-rc">4.9 (847 reviews)</span></div>
+      <div class="pd-prc">$289</div>
+      <div class="pd-stk"><span class="stk-p" aria-hidden="true"></span>In Stock — Ships in 1–2 business days</div>
+      <div class="fsbar"><div class="fsbar-l">Add <strong>$61</strong> more for free shipping!</div><div class="fsbar-t"><div class="fsbar-f" style="width:83%" role="progressbar" aria-valuenow="83" aria-valuemax="100"></div></div></div>
+      <div class="pd-wl">Select Weight / Spec</div>
+      <div class="pd-wo">
+        <button class="wb" onclick="sw2(this)">15 kg</button>
+        <button class="wb act" onclick="sw2(this)">20 kg</button>
+        <button class="wb" onclick="sw2(this)">25 kg</button>
+      </div>
+      <div class="pd-ctas">
+        <button class="btn-r" onclick="ac('Pro Olympic Barbell')">+ Add to Cart</button>
+        <button class="btn-b">Buy Now</button>
+      </div>
+      <nav class="pd-tabs-n" role="tablist">
+        <button class="pt act" onclick="pttab(this,'pt-ov')">Overview</button>
+        <button class="pt" onclick="pttab(this,'pt-sp')">Specs</button>
+        <button class="pt" onclick="pttab(this,'pt-rv')">Reviews</button>
+        <button class="pt" onclick="pttab(this,'pt-sh')">Shipping</button>
+      </nav>
+      <div id="pt-ov" class="ptc act">The FitBulls Pro Olympic Barbell is machined from high-tensile alloy steel rated at 185,000 PSI. Aggressive dual-zone knurling provides a secure grip for snatches, clean-and-jerks, heavy bench, and deadlifts. Hard chrome finish resists corrosion. Compatible with all standard 2" Olympic plates.</div>
+      <div id="pt-sp" class="ptc"><table class="spec-t"><tr><td>Weight</td><td>20 kg (44 lbs)</td></tr><tr><td>Length</td><td>2,200 mm</td></tr><tr><td>Sleeve Diameter</td><td>50 mm (2")</td></tr><tr><td>Shaft Diameter</td><td>28 mm</td></tr><tr><td>Tensile Strength</td><td>185,000 PSI</td></tr><tr><td>Max Load</td><td>700 kg / 1,543 lbs</td></tr><tr><td>Finish</td><td>Hard Chrome</td></tr><tr><td>Knurling</td><td>Dual-zone aggressive</td></tr></table></div>
+      <div id="pt-rv" class="ptc"><p style="margin-bottom:1rem"><span style="font-family:var(--fh);font-size:2.25rem;font-weight:900">4.9</span> <span style="color:var(--gold)">★★★★★</span> <span style="color:var(--muted);font-size:.82rem">(847 reviews)</span></p><p style="margin-bottom:.75rem;font-size:.875rem;color:rgba(255,255,255,.75)">"Absolute tank of a barbell. Knurling is sharp enough to hold, not sharp enough to tear." — James T. ★★★★★</p><p style="font-size:.875rem;color:rgba(255,255,255,.75)">"Bought two for our facility. Zero wobble, smooth spin, immaculate finish." — Coach R. ★★★★★</p></div>
+      <div id="pt-sh" class="ptc"><p style="margin-bottom:.75rem">🚀 <strong>Free shipping</strong> on orders over $150. Ships via FedEx Ground in 1–2 business days.</p><p style="margin-bottom:.75rem">📦 <strong>White-glove delivery</strong> available for racks and platforms — in-room placement included.</p><p>🔄 <strong>30-day free returns.</strong> Prepaid label provided. Full refund within 5 business days.</p></div>
+    </div>
+  </div>
+  <div style="margin-top:4.5rem">
+    <div class="stag">Complete the Setup</div>
+    <h2 class="sh" style="margin-bottom:1.85rem">You May Also Like</h2>
+    <div class="pg3">
+      <div class="pc" onclick="gpd(4)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=80&fit=crop&sat=-100&con=30" alt="Kettlebell" loading="lazy"><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Kettlebell Set')">+ Add to Cart</button></div></div><div class="pinfo"><div class="pname">Kettlebell Set</div><div class="pstars"><span class="st">★★★★☆</span></div><div class="ppr"><span class="pcur">$149</span></div></div></div>
+      <div class="pc" onclick="gpd(5)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=400&q=80&fit=crop&sat=-100&con=30" alt="Bench" loading="lazy"><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('FDB Bench')">+ Add to Cart</button></div></div><div class="pinfo"><div class="pname">Flat/Incline Bench</div><div class="pstars"><span class="st">★★★★★</span></div><div class="ppr"><span class="pcur">$379</span></div></div></div>
+      <div class="pc" onclick="gpd(3)" tabindex="0"><div class="pi"><img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=400&q=80&fit=crop&sat=-100&con=30" alt="Power Rack" loading="lazy"><div class="pa"><button class="pa-btn" onclick="event.stopPropagation();ac('Bull Power Rack')">+ Add to Cart</button></div></div><div class="pinfo"><div class="pname">Bull Power Rack</div><div class="pstars"><span class="st">★★★★★</span></div><div class="ppr"><span class="pcur">$899</span></div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="smcta sh" aria-label="Add to cart"><span class="sm-prc">$289</span><button class="btn-r" style="flex:1;justify-content:center" onclick="ac('Pro Olympic Barbell')">+ Add to Cart</button></div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<div id="pg-about" class="pg">
+<div class="ab-hero"><div class="ab-hc"><div class="stag">Our Story</div><h1>Born From<br>The Gym.<br>Built for <em>Warriors</em>.</h1></div></div>
+<div class="sbar" role="list">
+  <div class="sb" role="listitem"><span class="sb-n counter" data-t="10000">0</span><span class="sb-l">Happy Customers</span></div>
+  <div class="sb" role="listitem"><span class="sb-n counter" data-t="500">0</span><span class="sb-l">Products</span></div>
+  <div class="sb" role="listitem"><span class="sb-n">2020</span><span class="sb-l">Year Founded</span></div>
+  <div class="sb" role="listitem"><span class="sb-n">30-Day</span><span class="sb-l">Returns</span></div>
+</div>
+<div class="ab-story">
+  <div>
+    <div class="stag">The Mission</div>
+    <h2 class="sh">Serious Gear for<br><span class="hl">Serious Athletes</span></h2>
+    <p style="color:var(--muted);line-height:1.82;margin-bottom:.9rem">FitBulls was built in a 600-square-foot garage in 2020 by two brothers tired of equipment that bent, stripped, or quit under real load. They wanted gear as relentless as their training.</p>
+    <p style="color:var(--muted);line-height:1.82;margin-bottom:.9rem">Today we partner with foundries that supply professional sports franchises, and torture-test every product before it ships. No shortcuts. No compromises.</p>
+    <p style="color:var(--muted);line-height:1.82;margin-bottom:1.85rem">FitBulls now equips home gym warriors, competitive powerlifters, CrossFit boxes, and D1 athletic programs across North America — all built on the same obsession that started in that garage.</p>
+    <button class="btn-r" onclick="gp('products')">Shop the Collection →</button>
+  </div>
+  <div style="position:relative">
+    <div class="ab-iw"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=700&q=80&fit=crop&sat=-100&con=30&crop=center" alt="FitBulls premium barbell"><div class="ab-ia" aria-hidden="true"></div><div class="ab-itg" aria-hidden="true">Est. 2020</div></div>
+  </div>
+</div>
+<div class="tl-sec">
+  <div class="stag">Our Journey</div>
+  <h2 class="sh">Milestones</h2>
+  <div class="tl-list">
+    <div class="tl-it"><div class="tl-yr">2020</div><div class="tl-ct"><h3>Founded in a Garage</h3><p>Two brothers with a mission. Launched with three products — sold out in 48 hours.</p></div></div>
+    <div class="tl-it"><div class="tl-yr">2021</div><div class="tl-ct"><h3>First 1,000 Customers</h3><p>Expanded to 50 products, moved into our first warehouse, hired five athletes.</p></div></div>
+    <div class="tl-it"><div class="tl-yr">2022</div><div class="tl-ct"><h3>Pro Athletes Took Notice</h3><p>Three IFBB pros and two powerlifting world champions became FitBulls ambassadors.</p></div></div>
+    <div class="tl-it"><div class="tl-yr">2023</div><div class="tl-ct"><h3>5,000 Customers Strong</h3><p>Launched the loyalty program. Opened our first showroom. Began supplying university programs.</p></div></div>
+    <div class="tl-it"><div class="tl-yr">2024</div><div class="tl-ct"><h3>10,000+ Athletes and Growing</h3><p>500+ products, lifetime warranties, and a global community. This is just the beginning.</p></div></div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<div id="pg-contact" class="pg">
+<div class="ct-hero"><div class="ct-hi"><div class="stag">Get in Touch</div><h1 class="sh" style="font-size:clamp(2.4rem,5vw,4.5rem)">Let's Talk</h1><p style="color:var(--muted);font-size:.95rem;margin-top:.4rem;max-width:440px">Whether it's a product question, warranty claim, or wholesale inquiry — our team responds within 24 hours.</p></div></div>
+<div class="ct-lay">
+  <div>
+    <div class="ct-di"><div class="ct-ic" aria-hidden="true">📞</div><div><div class="cdl">Phone</div><div class="cdv">+1 (800) FIT-BULL<br><span style="font-size:.78rem;color:var(--muted)">Mon–Fri · 8am–6pm EST</span></div></div></div>
+    <div class="ct-di"><div class="ct-ic" aria-hidden="true">✉️</div><div><div class="cdl">Email</div><div class="cdv">support@fitbulls.com</div></div></div>
+    <div class="ct-di"><div class="ct-ic" aria-hidden="true">📍</div><div><div class="cdl">Headquarters</div><div class="cdv">1247 Iron Works Blvd<br>Austin, TX 78701</div></div></div>
+    <div class="ct-di"><div class="ct-ic" aria-hidden="true">🚚</div><div><div class="cdl">Orders & Shipping</div><div class="cdv">orders@fitbulls.com<br><span style="font-size:.78rem;color:var(--muted)">Response within 4 hours</span></div></div></div>
+    <div class="ct-map" role="img" aria-label="Map placeholder"><span style="font-size:2.25rem" aria-hidden="true">🗺️</span><span>Austin, TX — Interactive Map</span></div>
+  </div>
+  <form class="ct-form" onsubmit="hct(event)" novalidate>
+    <div class="fr"><div class="fg"><label class="fl" for="cn">First Name</label><input class="fi" id="cn" type="text" placeholder="Marcus" required></div><div class="fg"><label class="fl" for="cln">Last Name</label><input class="fi" id="cln" type="text" placeholder="Johnson" required></div></div>
+    <div class="fg"><label class="fl" for="ce">Email Address</label><input class="fi" id="ce" type="email" placeholder="marcus@email.com" required></div>
+    <div class="fg"><label class="fl" for="cs">Subject</label><select class="fi" id="cs"><option>Order Inquiry</option><option>Product Question</option><option>Warranty Claim</option><option>Wholesale / B2B</option><option>Other</option></select></div>
+    <div class="fg"><label class="fl" for="cm">Message</label><textarea class="fta" id="cm" placeholder="How can we help?" required></textarea></div>
+    <button class="btn-r" type="submit" style="width:100%;justify-content:center">Send Message →</button>
+  </form>
+</div>
+<div class="faq-w">
+  <div class="stag">FAQ</div>
+  <h2 class="sh" style="margin-bottom:2.25rem">Quick Answers</h2>
+  <div class="faq-it"><button class="faq-q" onclick="tfaq(this)" aria-expanded="false">How long does shipping take? <span class="faq-ar" aria-hidden="true">↓</span></button><div class="faq-a">Most orders ship within 1–2 business days. Standard delivery takes 2–5 business days. Large equipment orders may take 5–10 days. Free shipping on orders over $150.</div></div>
+  <div class="faq-it"><button class="faq-q" onclick="tfaq(this)" aria-expanded="false">What is your return policy? <span class="faq-ar" aria-hidden="true">↓</span></button><div class="faq-a">30-day hassle-free returns with no restocking fees. We provide a prepaid return label and process refunds within 5 business days of receiving the item.</div></div>
+  <div class="faq-it"><button class="faq-q" onclick="tfaq(this)" aria-expanded="false">What warranty coverage do you offer? <span class="faq-ar" aria-hidden="true">↓</span></button><div class="faq-a">All FitBulls products carry a lifetime structural warranty covering manufacturing defects. Wear items carry a 1-year warranty.</div></div>
+  <div class="faq-it"><button class="faq-q" onclick="tfaq(this)" aria-expanded="false">Do you ship internationally? <span class="faq-ar" aria-hidden="true">↓</span></button><div class="faq-a">Currently US and Canada. International shipping is coming in 2025 — subscribe to our newsletter for updates.</div></div>
+  <div class="faq-it"><button class="faq-q" onclick="tfaq(this)" aria-expanded="false">Can I order wholesale or outfit a facility? <span class="faq-ar" aria-hidden="true">↓</span></button><div class="faq-a">Yes! Dedicated pricing for gyms and athletic programs ordering 5+ units. Email wholesale@fitbulls.com or use the contact form above.</div></div>
+</div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+<div class="ft-g">
+  <div><div class="ft-logo">FIT<span>BULLS</span></div><p class="ft-bp">Premium gym equipment built for serious athletes. From garage gyms to professional facilities — engineered to outlast every PR.</p><div class="ft-soc"><a href="#" class="fsc" aria-label="Instagram">📷</a><a href="#" class="fsc" aria-label="YouTube">▶️</a><a href="#" class="fsc" aria-label="TikTok">🎵</a><a href="#" class="fsc" aria-label="Facebook">👤</a><a href="#" class="fsc" aria-label="X">✕</a></div></div>
+  <div><div class="ft-ht">Shop</div><ul class="ft-ls"><li><a href="#" onclick="gp('products')">All Products</a></li><li><a href="#" onclick="gp('products')">Barbells</a></li><li><a href="#" onclick="gp('products')">Dumbbells</a></li><li><a href="#" onclick="gp('products')">Power Racks</a></li><li><a href="#" onclick="gp('products')">Cardio</a></li><li><a href="#" onclick="gp('products')">Accessories</a></li></ul></div>
+  <div><div class="ft-ht">Company</div><ul class="ft-ls"><li><a href="#" onclick="gp('about')">About Us</a></li><li><a href="#" onclick="gp('contact')">Contact</a></li><li><a href="#">Careers</a></li><li><a href="#">Wholesale</a></li><li><a href="#">Affiliate Program</a></li><li><a href="#">Press Kit</a></li></ul></div>
+  <div><div class="ft-ht">Support</div><ul class="ft-ls"><li><a href="#" onclick="st('📦','Track','Enter order number to track')">Track Your Order</a></li><li><a href="#" onclick="gp('contact')">Returns</a></li><li><a href="#" onclick="gp('contact')">Warranty</a></li><li><a href="#" onclick="gp('contact')">FAQ</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li></ul></div>
+</div>
+<div class="ft-bot">
+  <div class="ft-cp">© 2024 FitBulls, Inc. All rights reserved. Built for the strong.</div>
+  <div class="pms"><span class="pm">VISA</span><span class="pm">MC</span><span class="pm">AMEX</span><span class="pm">PAYPAL</span><span class="pm">SHOP PAY</span><span class="pm">APPLE PAY</span></div>
+</div>
+</footer>
+<script>
+/* NAVIGATION */
+function gp(n){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('act'));
+  const pg=document.getElementById('pg-'+n);
+  if(pg){pg.classList.add('act');window.scrollTo({top:0,behavior:'smooth'});}
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('act'));
+  const nl=document.getElementById('nl-'+n);
+  if(nl)nl.classList.add('act');
+  closeMob();
+  setTimeout(()=>{initRv();if(n==='home'||n==='about')runCtrs();},120);
+}
+function gpd(id){gp('product-detail');}
+
+/* MOBILE MENU */
+const hbgBtn=document.getElementById('hbg'),mob=document.getElementById('mobMenu');
+hbgBtn.addEventListener('click',()=>{
+  const o=mob.classList.toggle('open');
+  hbgBtn.classList.toggle('open',o);
+  hbgBtn.setAttribute('aria-expanded',String(o));
+});
+function closeMob(){mob.classList.remove('open');hbgBtn.classList.remove('open');hbgBtn.setAttribute('aria-expanded','false');}
+
+/* SCROLL */
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('nav');
+  nav.classList.toggle('on',scrollY>60);
+  document.getElementById('sp').style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
+  document.getElementById('btt').classList.toggle('vis',scrollY>400);
+});
+document.getElementById('btt').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* HERO BG */
+setTimeout(()=>{const b=document.getElementById('hbg2');if(b)b.classList.add('rdy');},100);
+window.addEventListener('scroll',()=>{
+  const b=document.getElementById('hbg2');
+  if(b&&scrollY<innerHeight)b.style.transform=`scale(1) translateY(${scrollY*.28}px)`;
+});
+
+
+
+/* REVEAL */
+function initRv(){
+  const els=document.querySelectorAll('.rv:not(.vis)');
+  const ob=new IntersectionObserver((en)=>{en.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*65);ob.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -35px 0px'});
+  els.forEach(el=>ob.observe(el));
+}
+initRv();
+
+/* COUNTERS */
+let cRan=false;
+function runCtrs(){
+  if(cRan)return;cRan=true;
+  document.querySelectorAll('.counter').forEach(el=>{
+    const t=parseInt(el.getAttribute('data-t'));
+    let c=0,dur=1350,step=t/(dur/16);
+    const iv=setInterval(()=>{c=Math.min(c+step,t);el.textContent=Math.floor(c).toLocaleString();if(c>=t)clearInterval(iv);},16);
+  });
+}
+const hero=document.getElementById('hero');
+if(hero)new IntersectionObserver(en=>{if(en[0].isIntersecting)runCtrs();},{threshold:.3}).observe(hero);
+
+/* CAROUSEL — full-width, always fits */
+let ci=0,cAuto;
+function getTrack(){return document.getElementById('ttrack');}
+function moveC(d){
+  const tr=getTrack();if(!tr)return;
+  const total=tr.querySelectorAll('.tc').length;
+  ci=(ci+d+total)%total;
+  applyC();
+}
+function goC(i){ci=i;applyC();}
+function applyC(){
+  const tr=getTrack();if(!tr)return;
+  tr.style.transform='translateX(-'+(ci*100)+'%)';
+  document.querySelectorAll('.cdot2').forEach((d,i)=>d.classList.toggle('act',i===ci));
+}
+function startAuto(){
+  clearInterval(cAuto);
+  cAuto=setInterval(()=>{
+    const tr=getTrack();if(!tr)return;
+    const total=tr.querySelectorAll('.tc').length;
+    ci=(ci+1)%total;applyC();
+  },5000);
+}
+startAuto();
+document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(cAuto);else startAuto();});
+/* Pause on hover */
+const ttrackEl=document.getElementById('ttrack');
+if(ttrackEl){
+  ttrackEl.addEventListener('mouseenter',()=>clearInterval(cAuto));
+  ttrackEl.addEventListener('mouseleave',()=>startAuto());
+}
+/* Touch/swipe support */
+(function(){
+  const wrap=document.querySelector('.t-track-w');
+  if(!wrap)return;
+  let sx=0;
+  wrap.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+  wrap.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>40){moveC(dx<0?1:-1);}
+    startAuto();
+  },{passive:true});
+})();
+
+/* GALLERY */
+const imgs=['https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=700&q=80&fit=crop&sat=-100&con=30','https://images.unsplash.com/photo-1581009137042-c552e485697a?w=700&q=80&fit=crop&sat=-100&con=30','https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=700&q=80&fit=crop&sat=-100&con=30','https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=700&q=80&fit=crop&sat=-100&con=30'];
+function pdt(i,el){document.getElementById('pdmi').src=imgs[i];document.querySelectorAll('.pd-th').forEach((t,j)=>t.classList.toggle('act',j===i));}
+
+/* WEIGHT */
+function sw2(btn){document.querySelectorAll('.wb').forEach(b=>{b.classList.remove('act');b.setAttribute('aria-pressed','false')});btn.classList.add('act');btn.setAttribute('aria-pressed','true');}
+
+/* TABS */
+function pttab(btn,id){document.querySelectorAll('.pt').forEach(b=>{b.classList.remove('act');b.setAttribute('aria-selected','false')});document.querySelectorAll('.ptc').forEach(c=>c.classList.remove('act'));btn.classList.add('act');btn.setAttribute('aria-selected','true');document.getElementById(id).classList.add('act');}
+
+/* FAQ */
+function tfaq(btn){const it=btn.closest('.faq-it');const op=it.classList.toggle('op');btn.setAttribute('aria-expanded',String(op));}
+
+/* TOAST */
+let tTimer;
+function st(ic,title,sub){
+  document.getElementById('tic').textContent=ic;
+  document.getElementById('tt').textContent=title;
+  document.getElementById('ts').textContent=sub||'';
+  const t=document.getElementById('toast');
+  t.classList.add('sh');
+  clearTimeout(tTimer);
+  tTimer=setTimeout(()=>t.classList.remove('sh'),3200);
+}
+
+/* CART / WISHLIST */
+function ac(n){st('🛒','Added to Cart!',n+' is ready for checkout.');}
+function wl(n){st('♥','Saved!',n+' added to your wishlist.');}
+
+/* BUNDLE */
+const bd={rack:{sel:true,p:899,n:'Bull Power Rack'},bar:{sel:true,p:289,n:'Pro Olympic Barbell'},plates:{sel:false,p:249,n:'Weight Plate Set'},dumbs:{sel:false,p:319,n:'Adjustable Dumbbell Set'},bench:{sel:false,p:379,n:'Flat/Incline Bench'},mat:{sel:false,p:89,n:'Rubber Flooring'}};
+function tbi(k,p,n){bd[k].sel=!bd[k].sel;document.getElementById('bi-'+k).classList.toggle('sel',bd[k].sel);rBundle();}
+function rBundle(){
+  const sel=Object.values(bd).filter(i=>i.sel);
+  const sub=sel.reduce((s,i)=>s+i.p,0);
+  const disc=sel.length>=3?Math.round(sub*.12):0;
+  const tot=sub-disc;
+  document.getElementById('blines').innerHTML=sel.length?sel.map(i=>`<div class="b-line"><span class="bl-n">${i.n}</span><span class="bl-v">$${i.p}</span></div>`).join(''):'<div style="padding:.85rem 0;color:var(--muted);font-size:.86rem">Select items to build your gym</div>';
+  document.getElementById('btotval').textContent='$'+tot;
+  const dr=document.getElementById('bdiscrow');dr.style.display=disc>0?'flex':'none';
+  document.getElementById('bdiscval').textContent='-$'+disc;
+  document.getElementById('btip').textContent=sel.length>=3?`You're saving $${disc} with the bundle deal!`:sel.length>0?`Add ${3-sel.length} more item${3-sel.length===1?'':'s'} to unlock 12% off`:'';
+}
+rBundle();
+function abundle(){const sel=Object.values(bd).filter(i=>i.sel);if(!sel.length){st('⚠️','Nothing Selected','Pick at least one item.');return;}st('🛒','Bundle Added!',`${sel.length} items added to cart.`);}
+
+/* FORMS */
+function hnl(e){e.preventDefault();st('🎉','Subscribed!','Welcome to the FitBulls herd.');e.target.reset();}
+function hct(e){e.preventDefault();st('✉️','Message Sent!','We\'ll reply within 24 hours.');e.target.reset();}
+</script>
+</body>
+</html>
